@@ -21,7 +21,6 @@ services:
   this.gallery.frickin.rocks:
     container_name: this.gallery.frickin.rocks.wordpress
     image: 'bitnami/wordpress:5'
-    build: '.'
     ports:
         - '4445:4445'
     volumes:
