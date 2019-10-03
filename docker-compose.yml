@@ -1,13 +1,13 @@
 version: '2'
 services:
-  divi.rocks.mariadb:
-    container_name: divi.rocks.mariadb
-    image: 'divi.frickin.rocks/mariadb:10.3'
+  mom.rocks.mariadb:
+    container_name: mom.rocks.mariadb
+    image: 'mom.frickin.rocks/mariadb:10.3'
     build: './mariadb/10.3'
     volumes:
-      - 'divi-rocks-mariadb_data:/bitnami'
+      - 'mom-rocks-mariadb_data:/bitnami'
     ports:
-        - '3314:3314'
+        - '3320:3320'
     environment:
       - MYSQL_DATABASE=bitnami_wordpress
       - MYSQL_USERNAME=root
@@ -18,38 +18,38 @@ services:
       - mongonet
 
 
-  divi.frickin.rocks:
-    container_name: divi.frickin.rocks.wordpress
+  mom.frickin.rocks:
+    container_name: mom.frickin.rocks.wordpress
     image: 'bitnami/wordpress:5'
     build: '.'
     ports:
-        - '4447:4447'
+        - '4449:4449'
     volumes:
-      - 'divi-rocks-wordpress_data:/bitnami'
+      - 'mom-rocks-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
       - './Divi:/bitnami/wordpress/wp-content/themes/Divi'
       - './Extra:/bitnami/wordpress/wp-content/themes/Extra'
       - './bloom:/bitnami/wordpress/wp-content/plugins/bloom'
       - './monarch:/bitnami/wordpress/wp-content/plugins/monarch'
     depends_on:
-      - divi.rocks.mariadb
+      - mom.rocks.mariadb
     environment:
       - WORDPRESS_DATABASE_USER=root
       - WORDPRESS_DATABASE_PASSWORD=password
-      - MARIADB_HOST=divi.rocks.mariadb
-      - MARIADB_PORT_NUMBER=3314
+      - MARIADB_HOST=mom.rocks.mariadb
+      - MARIADB_PORT_NUMBER=3320
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - VIRTUAL_HOST=divi.frickin.rocks
-      - LETSENCRYPT_HOST=divi.frickin.rocks
+      - VIRTUAL_HOST=mom.frickin.rocks
+      - LETSENCRYPT_HOST=mom.frickin.rocks
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - mongonet
 
 
 volumes:
-  divi-rocks-mariadb_data:
+  mom-rocks-mariadb_data:
     driver: local
-  divi-rocks-wordpress_data:
+  mom-rocks-wordpress_data:
     driver: local
 
 networks:
