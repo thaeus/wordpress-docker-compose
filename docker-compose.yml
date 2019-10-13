@@ -5,7 +5,7 @@ services:
     image: 'puppy.git.pull/mariadb:10.3'
     build: './mariadb/10.3'
     volumes:
-      - 'puppy-mariadb_data:/bitnami'
+      - 'puppy-cc-mariadb_data:/bitnami'
     ports:
         - '3800:3800'
     environment:
@@ -18,15 +18,15 @@ services:
       - mongonet
 
 
-  puppy.git-pull.cheap:
-    container_name: puppy.git-pull.cheap.wordpress
+  puppy.git.pull.cheap:
+    container_name: puppy.git.pull.cheap.wordpress
     image: 'bitnami/wordpress:5'
     ports:
         - '3900:3900'
     volumes:
       - 'puppy-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
-      - './bitnami:/bitnami'
+      - './bitnami/wordpress/wp-content:/bitnami/wordpress/wp-content'
     depends_on:
       - puppy.mariadb
     environment:
@@ -43,7 +43,7 @@ services:
 
 
 volumes:
-  puppy-mariadb_data:
+  puppy-cc-mariadb_data:
     driver: local
   puppy-wordpress_data:
     driver: local
