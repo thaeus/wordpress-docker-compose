@@ -48,6 +48,7 @@ RUN set -ex; \
 
 RUN mkdir /docker-entrypoint-initdb.d
 COPY bitnami_wordpress.sql /docker-entrypoint-initdb.d/
+COPY postdata.sql /docker-entrypoint-initdb.d/
 # install "pwgen" for randomizing passwords
 # install "tzdata" for /usr/share/zoneinfo/
 RUN set -ex; \
@@ -131,5 +132,5 @@ COPY my.cnf /etc/mysql/conf.d/
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-EXPOSE 3314
+EXPOSE 3800
 CMD ["mysqld"]
