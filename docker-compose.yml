@@ -1,13 +1,13 @@
 version: '2'
 services:
-  puppy.mariadb:
-    container_name: puppy.mariadb
-    image: 'puppy.git.pull/mariadb:10.3'
+  infinitoes.mariadb:
+    container_name: infinitoes.mariadb
+    image: 'infinitoes.com/mariadb:10.3'
     build: './mariadb/10.3'
     volumes:
-      - 'puppy-cc-mariadb_data:/bitnami'
+      - 'infinitoes-mariadb_data:/bitnami'
     ports:
-        - '3800:3800'
+        - '3801:3801'
     environment:
       - MYSQL_DATABASE=bitnami_wordpress
       - MYSQL_USERNAME=root
@@ -18,34 +18,34 @@ services:
       - mongonet
 
 
-  puppy.git.pull.cheap:
-    container_name: puppy.git.pull.cheap.wordpress
+  infinitoes.com:
+    container_name: infinitoes.com.wordpress
     image: 'bitnami/wordpress:5'
     ports:
-        - '3900:3900'
+        - '3901:3901'
     volumes:
-      - 'puppy-wordpress_data:/bitnami'
+      - 'infinitoes-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
       - './bitnami/wordpress/wp-content:/bitnami/wordpress/wp-content'
     depends_on:
-      - puppy.mariadb
+      - infinitoes.mariadb
     environment:
       - WORDPRESS_DATABASE_USER=root
       - WORDPRESS_DATABASE_PASSWORD=password
-      - MARIADB_HOST=puppy.mariadb
-      - MARIADB_PORT_NUMBER=3800
+      - MARIADB_HOST=infinitoes.mariadb
+      - MARIADB_PORT_NUMBER=3801
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - VIRTUAL_HOST=puppy.git-pull.cheap
-      - LETSENCRYPT_HOST=puppy.git-pull.cheap
+      - VIRTUAL_HOST=infinitoes.com
+      - LETSENCRYPT_HOST=infinitoes.com
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - mongonet
 
 
 volumes:
-  puppy-cc-mariadb_data:
+  infinitoes-mariadb_data:
     driver: local
-  puppy-wordpress_data:
+  infinitoes-wordpress_data:
     driver: local
 
 networks:
