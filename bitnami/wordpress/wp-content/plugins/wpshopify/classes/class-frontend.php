@@ -226,7 +226,7 @@ class Frontend
                'enableCustomCheckoutDomain' => Data::coerce($this->plugin_settings['general']->enable_custom_checkout_domain, 'bool'),
                'myShopifyDomain' => $this->getMyShopifyDomain(),
                'urlProducts' => Utils::get_site_url() . '/' . Data::coerce($this->plugin_settings['general']->url_products, 'string'),
-               'urlCollections' => Utils::get_site_url() . '/' . Data::coerce($this->plugin_settings['general']->url_collections, 'string'),
+               'urlCollections' => Utils::get_site_url() . Data::coerce($this->plugin_settings['general']->url_collections, 'string'),
                'checkoutButtonTarget' => Data::coerce($this->plugin_settings['general']->checkout_button_target, 'string'),
                'itemsLinkToShopify' => Data::coerce($this->plugin_settings['general']->products_link_to_shopify, 'bool'),
                'disableDefaultPages' => Data::coerce($this->plugin_settings['general']->disable_default_pages, 'bool'),
