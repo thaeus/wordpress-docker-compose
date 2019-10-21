@@ -1,13 +1,14 @@
 version: '2'
 services:
-  puppy.mariadb:
-    container_name: puppy.mariadb
-    image: 'puppy.git.pull/mariadb:10.3'
+  apt.buy.mariadb:
+    container_name: apt.buy.mariadb
+    image: 'apt.buy.git.pull/mariadb:10.3'
     build: './mariadb/10.3'
+    restart: always
     volumes:
-      - 'puppy-cc-mariadb_data:/bitnami'
+      - 'apt-buy-cc-mariadb_data:/bitnami'
     ports:
-        - '3800:3800'
+        - '3802:3802'
     environment:
       - MYSQL_DATABASE=bitnami_wordpress
       - MYSQL_USERNAME=root
@@ -18,34 +19,35 @@ services:
       - mongonet
 
 
-  puppy.git.pull.cheap:
-    container_name: puppy.git.pull.cheap.wordpress
+  apt.buy.me:
+    container_name: apt.buy.me.wordpress
     image: 'bitnami/wordpress:5'
+    restart: always
     ports:
-        - '3900:3900'
+        - '3902:3902'
     volumes:
-      - 'puppy-wordpress_data:/bitnami'
+      - 'apt-buy-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
       - './bitnami/wordpress/wp-content:/bitnami/wordpress/wp-content'
     depends_on:
-      - puppy.mariadb
+      - apt.buy.mariadb
     environment:
       - WORDPRESS_DATABASE_USER=root
       - WORDPRESS_DATABASE_PASSWORD=password
-      - MARIADB_HOST=puppy.mariadb
-      - MARIADB_PORT_NUMBER=3800
+      - MARIADB_HOST=apt.buy.mariadb
+      - MARIADB_PORT_NUMBER=3802
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - VIRTUAL_HOST=puppy.git-pull.cheap
-      - LETSENCRYPT_HOST=puppy.git-pull.cheap
+      - VIRTUAL_HOST=apt-buy.me
+      - LETSENCRYPT_HOST=apt-buy.me
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - mongonet
 
 
 volumes:
-  puppy-cc-mariadb_data:
+  apt-buy-cc-mariadb_data:
     driver: local
-  puppy-wordpress_data:
+  apt-buy-wordpress_data:
     driver: local
 
 networks:
