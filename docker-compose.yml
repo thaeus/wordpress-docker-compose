@@ -1,14 +1,14 @@
 version: '2'
 services:
-  apt.buy.mariadb:
-    container_name: apt.buy.mariadb
-    image: 'apt.buy.git.pull/mariadb:10.3'
+  mybull.dog.mariadb:
+    container_name: mybull.dog.mariadb
+    image: 'mybull.dog.git.pull/mariadb:10.3'
     build: './mariadb/10.3'
     restart: always
     volumes:
-      - 'apt-buy-cc-mariadb_data:/bitnami'
+      - 'mybull-dog-cc-mariadb_data:/bitnami'
     ports:
-        - '3802:3802'
+        - '3340:3340'
     environment:
       - MYSQL_DATABASE=bitnami_wordpress
       - MYSQL_USERNAME=root
@@ -19,35 +19,35 @@ services:
       - mongonet
 
 
-  apt.buy.me:
-    container_name: apt.buy.me.wordpress
+  mybull.dog:
+    container_name: mybull.dog.wordpress
     image: 'bitnami/wordpress:5'
     restart: always
     ports:
-        - '3902:3902'
+        - '3341:3341'
     volumes:
-      - 'apt-buy-wordpress_data:/bitnami'
+      - 'mybull-dog-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
       - './bitnami/wordpress/wp-content:/bitnami/wordpress/wp-content'
     depends_on:
-      - apt.buy.mariadb
+      - mybull.dog.mariadb
     environment:
       - WORDPRESS_DATABASE_USER=root
       - WORDPRESS_DATABASE_PASSWORD=password
-      - MARIADB_HOST=apt.buy.mariadb
-      - MARIADB_PORT_NUMBER=3802
+      - MARIADB_HOST=mybull.dog.mariadb
+      - MARIADB_PORT_NUMBER=3340
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - VIRTUAL_HOST=apt-buy.me
-      - LETSENCRYPT_HOST=apt-buy.me
+      - VIRTUAL_HOST=mybull.dog
+      - LETSENCRYPT_HOST=mybull.dog
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - mongonet
 
 
 volumes:
-  apt-buy-cc-mariadb_data:
+  mybull-dog-cc-mariadb_data:
     driver: local
-  apt-buy-wordpress_data:
+  mybull-dog-wordpress_data:
     driver: local
 
 networks:
