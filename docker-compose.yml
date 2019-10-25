@@ -1,13 +1,13 @@
 version: '2'
 services:
-  divi.rocks.mariadb:
-    container_name: divi.rocks.mariadb
-    image: 'divi.frickin.rocks/mariadb:10.3'
+  blog.mybull.dog.mariadb:
+    container_name: blog.mybull.dog.mariadb
+    image: 'blog.mybull.dog/mariadb:10.3'
     build: './mariadb/10.3'
     volumes:
-      - 'divi-rocks-mariadb_data:/bitnami'
+      - 'blog-mybull-dog-mariadb_data:/bitnami'
     ports:
-        - '3314:3314'
+        - '3342:3342'
     environment:
       - MYSQL_DATABASE=bitnami_wordpress
       - MYSQL_USERNAME=root
@@ -18,38 +18,38 @@ services:
       - mongonet
 
 
-  divi.frickin.rocks:
-    container_name: divi.frickin.rocks.wordpress
+  blog.mybull.dog:
+    container_name: blog.mybull.dog.wordpress
     image: 'bitnami/wordpress:5'
     build: '.'
     ports:
-        - '4447:4447'
+        - '3343:3343'
     volumes:
-      - 'divi-rocks-wordpress_data:/bitnami'
+      - 'blog-mybull-dog-wordpress_data:/bitnami'
       - './php.ini:/opt/bitnami/php/lib/php.ini'
       - './Divi:/bitnami/wordpress/wp-content/themes/Divi'
       - './Extra:/bitnami/wordpress/wp-content/themes/Extra'
       - './bloom:/bitnami/wordpress/wp-content/plugins/bloom'
       - './monarch:/bitnami/wordpress/wp-content/plugins/monarch'
     depends_on:
-      - divi.rocks.mariadb
+      - mybull.dog.mariadb
     environment:
       - WORDPRESS_DATABASE_USER=root
       - WORDPRESS_DATABASE_PASSWORD=password
-      - MARIADB_HOST=divi.rocks.mariadb
-      - MARIADB_PORT_NUMBER=3314
+      - MARIADB_HOST=blog.mybull.dog.mariadb
+      - MARIADB_PORT_NUMBER=3342
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - VIRTUAL_HOST=divi.frickin.rocks
-      - LETSENCRYPT_HOST=divi.frickin.rocks
+      - VIRTUAL_HOST=blog.mybull.dog
+      - LETSENCRYPT_HOST=blog.mybull.dog
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - mongonet
 
 
 volumes:
-  divi-rocks-mariadb_data:
+  blog-mybull-dog-mariadb_data:
     driver: local
-  divi-rocks-wordpress_data:
+  blog-mybull-dog-wordpress_data:
     driver: local
 
 networks:
