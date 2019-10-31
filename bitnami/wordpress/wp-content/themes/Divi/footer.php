@@ -56,6 +56,9 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 <?php endif; // ! is_page_template( 'page-template-blank.php' ) ?>
 
 	</div> <!-- #page-container -->
+        <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/d6f36e8c6329a103a060f500a/dadda105a67bab40b01dfcf4e.js");</script>
+
 
 	<?php wp_footer(); ?>
 </body>
