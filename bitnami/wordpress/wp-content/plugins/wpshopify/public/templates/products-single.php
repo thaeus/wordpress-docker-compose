@@ -69,8 +69,24 @@ $Products->products([
    </div>
 
 </section>
+<h2>You may also like: </h2>
+<?php
+$galleries = ['hoodie-dog','bedding','hoodie-dog'];
+$gal = $galleries[rand(0,2)];
+echo do_shortcode("[wps_products page_size=3 tag='".$gal."']"); 
+
+
+
+
+
+
+
+//echo do_shortcode('[button link="http://google.com"] Button Text [/button]');
+
+?>
 
 <?php
 
 
 get_footer('wpshopify');
+
